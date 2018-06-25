@@ -294,7 +294,7 @@ function Export-SslCertificate ($waHostName, $password) {
 
     Write-Host "$time : Exporting $waHostName SSL Certificate..."
     $filePath = $certPath + $waHostName + ".pfx"
-    $cert = Get-ChildItem -Path "Cert:\LocalMachine\My" | ? { $_.FriendlyName -eq $waHostName }
+    $cert = Get-ChildItem -Path "Cert:\LocalMachine\My" | Where-Object { $_.FriendlyName -eq $waHostName }
     $cert | Export-PfxCertificate -FilePath $filePath -Password $password
 }
 
